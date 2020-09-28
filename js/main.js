@@ -1,7 +1,71 @@
 'use strict';
 
 var map = document.querySelector('.map');
-map.classList.remove('map--faded');
+
+// Добавление атрибутов disabled в неактивное состояние
+var adForm = document.querySelector('.ad-form');
+var fieldsetsForm = adForm.querySelectorAll('fieldset');
+for (var q = 0; q < fieldsetsForm.length; q++) {
+	fieldsetsForm[q].setAttribute('disabled', 'disabled');
+}
+
+// Добавление атрибутов disabled в неактивное состояние
+var mapFilters = map.querySelector('.map__filters');
+var selectsFilters = mapFilters.querySelectorAll('select');
+var fieldsetFilters = mapFilters.querySelector('fieldset');
+
+for (var z = 0; z < selectsFilters.length; z++) {
+	selectsFilters[z].setAttribute('disabled', 'disabled');
+}
+
+fieldsetFilters.setAttribute('disabled', 'disabled');
+
+// Координаты главной метки
+var pinMain = map.querySelector('.map__pin--main');
+var addressForm = document.querySelector('#address');
+
+var coordX = pinMain.style.left;
+var valueCoordX = coordX.slice(0, coordX.length - 2);
+var coordY = pinMain.style.top;
+var valueCoordY = coordY.slice(0, coordX.length - 2);
+
+addressForm.value = valueCoordX + ', ' + valueCoordY;
+
+// Удаление атрибутов disabled в активном состоянии и прибавление пикселей в к координате
+var CLICK_LEFT = 1;
+var ENTER_KEY = 'Enter';
+
+var addActive = function () {
+	for (var q = 0; q < fieldsetsForm.length; q++) {
+		fieldsetsForm[q].removeAttribute('disabled');
+	}
+
+	for (var z = 0; z < selectsFilters.length; z++) {
+		selectsFilters[z].removeAttribute('disabled');
+	}
+	fieldsetFilters.removeAttribute('disabled');
+
+	map.classList.remove('map--faded');
+	adForm.classList.remove('ad-form--disabled');
+
+	addressForm.value = valueCoordX + ', ' + (Number(valueCoordY) + 53);
+
+	renderingPins();
+};
+
+// Удаление атрибутов disabled в активном состоянии через mousedown
+pinMain.addEventListener('mousedown', function (evt) {
+	if (evt.which === CLICK_LEFT) {
+		addActive();
+	}
+}); 
+
+// Удаление атрибутов disabled в активном состоянии через keydown
+pinMain.addEventListener('keydown', function (evt) {
+	if (evt.key === ENTER_KEY) {
+		addActive();
+	}
+});
 
 // Рандомные числа
 var generateRandom = function (min, max) {
@@ -49,10 +113,10 @@ var generateData = function () {
 	return advertising;
 };
 
+// Функция с заполнением данных в template #pin
 var mapPin = document.querySelector('#pin')
 .content.querySelector('.map__pin');
 
-// Функция с заполнением данных в template #pin
 var createPins = function (pin) {
 	var pinElement = mapPin.cloneNode(true);
 	var pinElementImg = pinElement.querySelector('img');
@@ -66,9 +130,9 @@ var createPins = function (pin) {
 	return pinElement;
 };
 
+// Функция c отрисовкой pins в pinsContainer
 var pinsContainer = document.querySelector('.map__pins');
 
-// Функция c отрисовкой pins в pinsContainer
 var renderingPins = function () {
 	var pinsData = generateData();
 	var fragment = document.createDocumentFragment();
@@ -79,15 +143,14 @@ var renderingPins = function () {
 
 	pinsContainer.appendChild(fragment);
 
-	return pinsContainer;
+	// return pinsContainer;
+	window.rendering = pinsContainer.querySelectorAll('.map__pin');
 };
 
-renderingPins();
-
+// Функция с заполнением данных в template #card
 var mapCard = document.querySelector('#card')
 .content.querySelector('.map__card');
 
-// Функция с заполнением данных в template #card
 var createCard = function (card) {
 	var cardElement = mapCard.cloneNode(true);
 
@@ -171,7 +234,7 @@ var createCard = function (card) {
 var filtersContainer = document.querySelector('.map__filters-container');
 
 // Функция c отрисовкой cards в map
-var renderingCards = function () {
+var renderingCards = function (value) {
 	var cardData = generateData();
 	var fragment = document.createDocumentFragment();
 
@@ -182,13 +245,63 @@ var renderingCards = function () {
 	map.insertBefore(fragment, filtersContainer);
 };
 
-renderingCards();
+// РАЗОБРАТЬСЯ
+/*var mapPins = document.querySelectorAll('.map__pin');
+var mapCards = document.querySelectorAll('.map__card');
 
-var feature = document.querySelectorAll('.popup__feature');
+console.log(mapCards);
+console.log(mapPins);
+*/
+
+// var addClick = function (mapPin, mapCard) {
+// 	mapPin.addEventListener('click', function () {
+	
+// 	});
+// };
+
+// for (var v = 0; v < window.rendering.length; v++) {
+// 	addClick(window.rendering[v], renderingCards(v));
+// }
+
 
 // Удаление ненужных feature
+var feature = document.querySelectorAll('.popup__feature');
+
 for (var g = 0; g < feature.length; g++) {
 	if (feature[g].textContent === '') {	
 		feature[g].remove();
 	}
 }
+
+// Валидация (комнат и гостей)
+var roomNumber = document.querySelector('#room_number');
+var capacityNumber = document.querySelector('#capacity');
+
+var formSubmit = document.querySelector('.ad-form__submit');
+
+var getRoomsValidity = function (evt) {
+	if (roomNumber.value == 1 && capacityNumber.value > 1) {
+		capacityNumber.setCustomValidity('Выберете не больше 1-ого гостя');
+	} else if (roomNumber.value == 2 && capacityNumber.value > 2) {
+		capacityNumber.setCustomValidity('Выберете не больше 2-ух гостей');
+	} else if (roomNumber.value < 100 && capacityNumber.value == 0) {
+		capacityNumber.setCustomValidity('Не для гостей - выбирается только на 100 комнат');
+	} else if (roomNumber.value == 100 && capacityNumber.value > 0) {
+		capacityNumber.setCustomValidity('Выберете - не для гостей');
+	} else {
+		capacityNumber.setCustomValidity('');
+	}	
+};
+
+getRoomsValidity();
+
+roomNumber.addEventListener('change', function () {
+	getRoomsValidity();
+});
+
+capacityNumber.addEventListener('change', function () {
+	getRoomsValidity();
+});
+
+
+

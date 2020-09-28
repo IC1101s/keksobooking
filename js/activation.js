@@ -1,0 +1,82 @@
+'use strict';
+
+(function () {
+	var map = document.querySelector('.map');
+
+	// Добавление атрибутов disabled в неактивное состояние
+	var adForm = document.querySelector('.ad-form');
+	var fieldsetsForm = adForm.querySelectorAll('fieldset');
+	for (var i = 0; i < fieldsetsForm.length; i++) {
+		fieldsetsForm[i].setAttribute('disabled', 'disabled');
+	}
+
+	// Добавление атрибутов disabled в неактивное состояние
+	var mapFilters = map.querySelector('.map__filters');
+	var selectsFilters = mapFilters.querySelectorAll('select');
+	var fieldsetFilters = mapFilters.querySelector('fieldset');
+
+	for (var j = 0; j < selectsFilters.length; j++) {
+		selectsFilters[j].setAttribute('disabled', 'disabled');
+	}
+
+	fieldsetFilters.setAttribute('disabled', 'disabled');
+
+	// Координаты главной метки
+	var pinMain = map.querySelector('.map__pin--main');
+	var addressForm = document.querySelector('#address');
+
+	var coordX = pinMain.style.left;
+	var valueCoordX = coordX.slice(0, coordX.length - 2);
+	var coordY = pinMain.style.top;
+	var valueCoordY = coordY.slice(0, coordX.length - 2);
+
+	addressForm.value = valueCoordX + ', ' + valueCoordY;
+
+	// Удаление атрибутов disabled в активном состоянии и прибавление пикселей в к координате
+	var CLICK_LEFT = 1;
+	var ENTER_KEY = 'Enter';
+
+	var addActive = function () {
+		for (var i = 0; i < fieldsetsForm.length; i++) {
+			fieldsetsForm[i].removeAttribute('disabled');
+		}
+
+		for (var j = 0; j < selectsFilters.length; j++) {
+			selectsFilters[j].removeAttribute('disabled');
+		}
+		fieldsetFilters.removeAttribute('disabled');
+
+		map.classList.remove('map--faded');
+		adForm.classList.remove('ad-form--disabled');
+
+		addressForm.value = valueCoordX + ', ' + (Number(valueCoordY) + 53);
+	};
+
+	var visible = function () {
+		window.map.renderingPins();
+		window.map.renderingCards();
+		window.opencards();
+	};
+
+	// Удаление атрибутов disabled в активном состоянии через mousedown
+	pinMain.addEventListener('mousedown', function (evt) {
+		if (map.classList.contains('map--faded')) {
+			visible();
+		}
+
+		if (evt.which === CLICK_LEFT) {
+			addActive();
+		}
+	}); 
+
+	// Удаление атрибутов disabled в активном состоянии через keydown
+	pinMain.addEventListener('keydown', function (evt) {
+		if (map.classList.contains('map--faded')) {
+			visible();
+		}
+
+		if (evt.key === ENTER_KEY) {
+			addActive();
+		}
+	});
+})();
