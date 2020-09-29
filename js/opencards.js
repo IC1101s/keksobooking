@@ -46,7 +46,6 @@
 							}		
 						};
 
-
 						cardСlose.addEventListener('click', onClickCloseCard);
 						document.addEventListener('keydown', onDownEscCloseCard);
 					})();
