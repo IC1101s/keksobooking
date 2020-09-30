@@ -9,6 +9,8 @@
 	var openCard = function () {
 		var pins = window.map.arrayPins;
 		var cards = window.map.arrayCards;
+		console.log(pins.length);
+		console.log(cards.length);
 
 		for (var i = 0; i < pins.length; i++) {
 			(function (mapPin, mapCard) {

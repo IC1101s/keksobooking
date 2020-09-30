@@ -42,8 +42,8 @@
 	};
 
 	var visible = function () {
-		window.map.renderingPins();
-		window.map.renderingCards();
+		window.backend.load(window.map.onRenderingPins);
+		window.backend.load(window.map.onRenderingCards);
 		window.opencards();
 	};
 

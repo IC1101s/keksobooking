@@ -21,7 +21,7 @@
 
 		//////
 		var typeCard = cardElement.querySelector('.popup__type');
-		var typeArray = card.offer.type[window.random(0, card.offer.type.length - 1)];
+		var typeArray = card.offer.type;
 
 		if (typeArray === 'flat') {
 			typeCard.textContent = 'Квартира';
@@ -41,10 +41,10 @@
 
 		//////
 		cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' 
-		+ card.offer.checkin[window.random(0, 2)] + ' выезд до ' + card.offer.checkout[window.random(0, 2)];
+		+ card.offer.checkin + ' выезд до ' + card.offer.checkout;
 		
 		//////
-		for (var j = 0; j < window.random(1, card.offer.features.length); j++) {
+		for (var j = 0; j < card.offer.features.length; j++) {
 			var cardFeature = card.offer.features[j];		
 
 			if (cardFeature === 'wifi') {			
