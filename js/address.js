@@ -5,7 +5,7 @@
 	var PIN_WIDTH = 62;
   	var PIN_HEIGHT = 62;
   	var PIN_TIP = 22;
-
+  	var CLICK_LEFT = 1;
 	// Координаты главной метки
 	var map = document.querySelector('.map');
 	var pinMain = document.querySelector('.map__pin--main');

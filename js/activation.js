@@ -41,9 +41,8 @@
 		adForm.classList.remove('ad-form--disabled');
 	};
 
-	var visible = function () {
-		window.backend.load(window.map.onRenderingPins);
-		window.backend.load(window.map.onRenderingCards);
+	var visible = function () {	
+		window.test2();	
 		window.opencards();
 	};
 

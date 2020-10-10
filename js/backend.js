@@ -32,6 +32,8 @@
 			xhr.open('GET', URL_GET);
 
 			xhr.send();
+
+			console.log('load');
 		}
 	};
 })();
