@@ -9,8 +9,6 @@
 	var openCard = function () {
 		var pins = window.map.arrayPins;
 		var cards = window.map.arrayCards;
-		console.log(pins);
-		console.log(cards);
 
 		for (var i = 0; i < pins.length; i++) {
 			(function (mapPin, mapCard) {
@@ -19,9 +17,9 @@
 
 					// Удаление ненужных feature
 					var feature = document.querySelectorAll('.popup__feature');
-					for (var i = 0; i < feature.length; i++) {
-						if (feature[i].textContent === '') {	
-							feature[i].remove();
+					for (var j = 0; j < feature.length; j++) {
+						if (feature[j].textContent === '') {	
+							feature[j].remove();
 						}
 					}
 
@@ -30,6 +28,12 @@
 					if (allCard.length > 1) {
 						allCard[0].remove();
 					}
+
+					//
+					// var popupPhotos = map.querySelectorAll('.popup__photo');
+					// if (popupPhotos.length > 0) {
+					// 	popupPhotos[0].remove();
+					// }
 
 					// Удаление карточки по клику и Esc
 					(function () {
@@ -45,6 +49,7 @@
 						var onDownEscCloseCard = function (evt) {	
 							if (card && evt.key === ECS_KEY) {
 								card.remove();
+								document.removeEventListener('keydown', onDownEscCloseCard);
 							}		
 						};
 
