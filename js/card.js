@@ -26,16 +26,21 @@
 		var typeCard = cardElement.querySelector('.popup__type');
 		var typeArray = card.offer.type;
 
-		if (typeArray === 'flat') {
-			typeCard.textContent = 'Квартира';
-		} else if (typeArray === 'bungalo') {
-			typeCard.textContent = 'Бунгало';
-		} else if (typeArray === 'house') {
-			typeCard.textContent = 'Дом';
-		} else if (typeArray === 'palace') {
-			typeCard.textContent = 'Дворец';
-		} else {
-			typeCard.textContent = 'Неизвестно';
+		switch (typeArray) {
+			case 'flat':
+				typeCard.textContent = 'Квартира';
+				break;
+			case 'bungalo':
+				typeCard.textContent = 'Бунгало';
+				break;
+			case 'house':
+				typeCard.textContent = 'Дом';
+				break;
+			case 'palace':
+				typeCard.textContent = 'Дворец';
+				break;
+			default: 
+				typeCard.textContent = 'Не указано'
 		}
 
 		// Выводит количество комнат и гостей
@@ -48,21 +53,30 @@
 		
 		// Выводит доступные удобства
 		for (var j = 0; j < card.offer.features.length; j++) {
-			var cardFeature = card.offer.features[j];		
+			var cardFeature = card.offer.features[j];
 
-			if (cardFeature === 'wifi') {			
-				cardElement.querySelector('.popup__feature--wifi').textContent = cardFeature;
-			} else if (cardFeature === 'dishwasher') {
-				cardElement.querySelector('.popup__feature--dishwasher').textContent = cardFeature;
-			} else if (cardFeature === 'parking') {
-				cardElement.querySelector('.popup__feature--parking').textContent = cardFeature;
-			} else if (cardFeature === 'washer') {
-				cardElement.querySelector('.popup__feature--washer').textContent = cardFeature;
-			} else if (cardFeature === 'elevator') {
-				cardElement.querySelector('.popup__feature--elevator').textContent = cardFeature;
-			} else if (cardFeature === 'conditioner') {
-				cardElement.querySelector('.popup__feature--conditioner').textContent = cardFeature;
-			}
+			switch (cardFeature) {
+				case 'wifi':
+					cardElement.querySelector('.popup__feature--wifi').textContent = cardFeature;
+					break;
+				case 'dishwasher':
+					cardElement.querySelector('.popup__feature--dishwasher').textContent = cardFeature;
+					break;
+				case 'parking':
+					cardElement.querySelector('.popup__feature--parking').textContent = cardFeature;
+					break;
+				case 'washer':
+					cardElement.querySelector('.popup__feature--washer').textContent = cardFeature;
+					break;
+				case 'elevator':
+					cardElement.querySelector('.popup__feature--elevator').textContent = cardFeature;
+					break;
+				case 'conditioner':
+					cardElement.querySelector('.popup__feature--conditioner').textContent = cardFeature;
+					break;
+				default: 
+					throw new Error('Неизвестная услуга ' + cardFeature);
+			}		
 		}
 
 		// Выводит описание недвижимости
@@ -80,8 +94,12 @@
 			fragment.appendChild(photo);	
 		}
 		
-		pictures.appendChild(fragment);		
+		pictures.appendChild(fragment);	
 
+		// Удаление фото без ссылки
+		var popupPhoto = pictures.querySelectorAll('.popup__photo');
+		popupPhoto[0].remove();
+		
 		// Выводит аватарку 
 		cardElement.querySelector('.popup__avatar').src = card.author.avatar;
 

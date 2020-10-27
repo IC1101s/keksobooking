@@ -6,16 +6,15 @@
   	var PIN_HEIGHT = 62;
   	var PIN_TIP = 22;
   	var CLICK_LEFT = 1;
-	// Координаты главной метки
-	var map = document.querySelector('.map');
+	
 	var pinMain = document.querySelector('.map__pin--main');
 	var addressForm = document.querySelector('#address');
-
 	var coordX = pinMain.style.left;	
 	var coordY = pinMain.style.top;
 	var valueCoordX = coordX.slice(0, coordX.length - 2);
 	var valueCoordY = coordY.slice(0, coordX.length - 2);
 
+	// Координаты главной метки
 	var addressMain = {
 		x: (Number(valueCoordX) + PIN_WIDTH / 2),
 		y: (Number(valueCoordY) + PIN_HEIGHT / 2)
@@ -39,9 +38,7 @@
 		}
 	});
 
-	pinMain.addEventListener('mousedown', function (evt) {
-		evt.preventDefault();
-
+	var getMovingPin = function () {
 		getDragger();
 
 		var onMouseMove = function (moveEvt) {
@@ -70,5 +67,7 @@
 
 		document.addEventListener('mousemove', onMouseMove);
 		document.addEventListener('mouseup', onMouseUp);
-	}); 
+	};
+
+	window.address = getMovingPin;
 })();

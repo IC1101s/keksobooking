@@ -6,6 +6,13 @@
 	var map = document.querySelector('.map');
 	var filtersContainer = document.querySelector('.map__filters-container');
 
+/*	var test = function () {
+		var popupPhotos = map.querySelectorAll('.popup__photo');
+		if (popupPhotos.length > 0) {
+			popupPhotos[0].remove();
+		}
+	};*/
+	
 	var openCard = function () {
 		var pins = window.map.arrayPins;
 		var cards = window.map.arrayCards;
@@ -28,12 +35,6 @@
 					if (allCard.length > 1) {
 						allCard[0].remove();
 					}
-
-					//
-					// var popupPhotos = map.querySelectorAll('.popup__photo');
-					// if (popupPhotos.length > 0) {
-					// 	popupPhotos[0].remove();
-					// }
 
 					// Удаление карточки по клику и Esc
 					(function () {

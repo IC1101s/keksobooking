@@ -36,18 +36,25 @@
 	var priceHous = document.querySelector('#price');
 
 	var getTypeValidity = function () {
-		if (typeHous.value === 'bungalo') {
-			priceHous.min = 0;
-			priceHous.placeholder = '0';
-		} else if (typeHous.value == 'flat') {
-			priceHous.min = 1000;
-			priceHous.placeholder = '1000';
-		} else if (typeHous.value == 'house') {
-			priceHous.min = 5000;
-			priceHous.placeholder = '5000';
-		} else if (typeHous.value == 'palace') {
-			priceHous.min = 10000;
-			priceHous.placeholder = '10000';
+		switch (typeHous.value) {
+			case 'bungalo':
+				priceHous.min = 0;
+				priceHous.placeholder = '0';
+				break;
+			case 'flat':
+				priceHous.min = 1000;
+				priceHous.placeholder = '1000';
+				break;
+			case 'house':
+				priceHous.min = 5000;
+				priceHous.placeholder = '5000';
+				break;
+			case 'palace':
+				priceHous.min = 10000;
+				priceHous.placeholder = '10000';
+				break;
+			default: 
+				throw new Error('Ошибка!');
 		}
 	};
 

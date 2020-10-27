@@ -12,7 +12,7 @@
 	var selectsFilters = mapFilters.querySelectorAll('select');
 	var fieldsetFilters = mapFilters.querySelector('fieldset');
 
-	(function () {	
+	var blockMapAndForm = function () {	
 		// Добавление атрибутов disabled у adForm в неактивное состояние
 		for (var i = 0; i < fieldsetsForm.length; i++) {
 			fieldsetsForm[i].setAttribute('disabled', 'disabled');
@@ -24,7 +24,9 @@
 		}
 
 		fieldsetFilters.setAttribute('disabled', 'disabled');
-	})();
+	};
+
+	blockMapAndForm();
 
 	// Удаление атрибутов disabled и лишних классов для активного состояния
 	var activationMapAndForm = function () {
@@ -40,9 +42,16 @@
 
 		map.classList.remove('map--faded');
 		adForm.classList.remove('ad-form--disabled');
-
-		window.map.onRenderingPins();	
+			
+		window.map.onRenderingPins();		
 		window.opencards();
+	};
+
+	var shutdownMapAndForm = function () {
+		blockMapAndForm();
+
+		map.classList.add('map--faded');
+		adForm.classList.add('ad-form--disabled');
 	};
 
 	// Активация функции addActiveState и visible (показ pins в активном состоянии через mousedown)
@@ -51,6 +60,7 @@
 		
 		if (evt.which === CLICK_LEFT) { // map.classList.contains('map--faded')
 			activationMapAndForm();
+			window.address();
 		}
 	}); 
 
@@ -58,6 +68,11 @@
 	pinMain.addEventListener('keydown', function (evt) {
 		if (evt.key === ENTER_KEY) { // map.classList.contains('map--faded')
 			activationMapAndForm();
+			window.address();
 		}
 	});
+
+	window.condition = {
+		shutdownMapAndForm: shutdownMapAndForm
+	};
 })();
