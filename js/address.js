@@ -31,7 +31,7 @@
 			dragger = false;
 		}
 	};
-
+	
 	pinMain.addEventListener('keydown', function (evt) {
 		if (evt.key === ENTER_KEY) {
 			getDragger();

@@ -42,9 +42,8 @@
 
 		map.classList.remove('map--faded');
 		adForm.classList.remove('ad-form--disabled');
-		
-		window.map.onRenderingPins();
-		window.opencards();
+
+		window.backend.load(window.map.onCreateCardsAndPins, window.error);
 	};
 
 	var shutdownMapAndForm = function () {
@@ -69,12 +68,7 @@
 		if (evt.key === ENTER_KEY && map.classList.contains('map--faded')) {
 			activationMapAndForm();	
 		}
-
-		window.address();
 	});
-
-	window.backend.load(window.map.onCreateCardsAndPins, window.map.onError); 
-	// можно поставить в функцию activationMapAndForm, а функцию window.map.onRenderingPins() в onCreateCardsAndPins()
 
 	window.condition = {
 		shutdownMapAndForm: shutdownMapAndForm
