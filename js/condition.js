@@ -42,14 +42,13 @@
 
 		map.classList.remove('map--faded');
 		adForm.classList.remove('ad-form--disabled');
-			
-		window.map.onRenderingPins();		
+		
+		window.map.onRenderingPins();
 		window.opencards();
 	};
 
 	var shutdownMapAndForm = function () {
 		blockMapAndForm();
-
 		map.classList.add('map--faded');
 		adForm.classList.add('ad-form--disabled');
 	};
@@ -58,19 +57,24 @@
 	pinMain.addEventListener('mousedown', function (evt) {
 		evt.preventDefault();
 		
-		if (evt.which === CLICK_LEFT) { // map.classList.contains('map--faded')
-			activationMapAndForm();
-			window.address();
+		if (evt.which === CLICK_LEFT && map.classList.contains('map--faded')) {
+			activationMapAndForm();	
 		}
+
+		window.address();
 	}); 
 
 	// Активация функции addActiveState и visible (показ pins в активном состоянии через keydown)
 	pinMain.addEventListener('keydown', function (evt) {
-		if (evt.key === ENTER_KEY) { // map.classList.contains('map--faded')
-			activationMapAndForm();
-			window.address();
+		if (evt.key === ENTER_KEY && map.classList.contains('map--faded')) {
+			activationMapAndForm();	
 		}
+
+		window.address();
 	});
+
+	window.backend.load(window.map.onCreateCardsAndPins, window.map.onError); 
+	// можно поставить в функцию activationMapAndForm, а функцию window.map.onRenderingPins() в onCreateCardsAndPins()
 
 	window.condition = {
 		shutdownMapAndForm: shutdownMapAndForm

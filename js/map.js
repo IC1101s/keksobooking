@@ -7,9 +7,9 @@
 	.content.querySelector('.error');
 	var errorButton = error.querySelector('.error__button');
 	var main = document.querySelector('main');
-	var pinsContainer = document.querySelector('.map__pins');
-	var arrayCards = [];
-	var arrayPins = [];
+	var pinsContainer = document.querySelector('.map__pins');	
+
+	//----------------------------------------------------------------------------------------------------
 
 	var onKeydownPopupError = function (evtKey) {
 		if (evtKey.key === ECS_KEY) { 
@@ -31,13 +31,40 @@
 
 	var onError = function (err) {
 		main.appendChild(error);
+
 		console.log(err);
 
 		errorButton.addEventListener('click', onClickPopupError);
 		document.addEventListener('keydown', onKeydownPopupError);		
 		document.addEventListener('click', onClickPopupError);	
 	};
+
+	//----------------------------------------------------------------------------------------------------
+
+	var arrayCards = [];
+	var arrayPins = [];
+
+	var onCreateCardsAndPins = function (pins) {
+		var createCards = window.card;
+		var createPins = window.pin;
+		
+		for (var i = 0; i < pins.length; i++) {
+			arrayPins.push(createPins(pins[i]));	
+			arrayCards.push(createCards(pins[i]));
+		}
+	};
+
+	// Функция для заполнения cards в arrayCards 
+	/*var onCreateCards = function (cards) {
+		var createCards = window.card;
 	
+		for (var i = 0; i < cards.length; i++) {
+			arrayCards.push(createCards(cards[i]));
+		}
+
+		// console.log('Cards');	
+	};
+
 	// Функция для заполнения pins в arrayPins
 	var onCreatePins = function (pins) {
 		var createPins = window.pin;
@@ -45,21 +72,15 @@
 		for (var i = 0; i < pins.length; i++) {
 			arrayPins.push(createPins(pins[i]));	
 		}
+
+		// console.log('Pins');
+
+		onRenderingPins();
+
+		window.opencards(); // иногда выдает ОШИБКУ, так как сервак не успевает всё подгрузить
+		// можно добавить в backend, но тогда будет ошибка и двойной вызов ----------------------------------
 	};
-
-	window.backend.load(onCreatePins, onError);
-
-	// Функция для заполнения cards в arrayCards 
-	var onCreateCards = function (cards) {
-		var createCards = window.card;
-	
-		for (var i = 0; i < cards.length; i++) {
-			arrayCards.push(createCards(cards[i]));
-		}
-	};
-
-	window.backend.load(onCreateCards, onError);	
-
+*/
 	// Функция для отрисовки pins
 	var onRenderingPins = function () {
 		var fragment = document.createDocumentFragment();
@@ -70,6 +91,8 @@
 
 		pinsContainer.appendChild(fragment);
 	};
+
+    //----------------------------------------------------------------------------------------------------
 
 	// AJAX отправка данных
 	var form = document.querySelector('.ad-form');
@@ -137,6 +160,8 @@
 	window.map = {
 		onRenderingPins: onRenderingPins,
 		arrayCards: arrayCards,
-		arrayPins: arrayPins
+		arrayPins: arrayPins,
+		onCreateCardsAndPins: onCreateCardsAndPins,
+		onError: onError,
 	};
 })();

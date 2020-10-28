@@ -15,6 +15,7 @@
 			xhr.addEventListener('load', function () {
 				if (xhr.status === STATUS_OK) {
 					onLoad(xhr.response);
+					// window.opencards();
 				} else {
 					onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
 				}	
@@ -32,7 +33,7 @@
 
 			xhr.open('GET', URL_GET);
 
-			xhr.send();
+			xhr.send();	
 		},
 
 		publish: function (data, onPublish, onError) {
