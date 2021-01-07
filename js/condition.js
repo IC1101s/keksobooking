@@ -4,6 +4,7 @@
 	var CLICK_LEFT = 1;
 	var ENTER_KEY = 'Enter';
 
+	var mapFilter = document.querySelector('.map__filter');
 	var map = document.querySelector('.map');
 	var pinMain = map.querySelector('.map__pin--main');
 	var adForm = document.querySelector('.ad-form');
@@ -43,7 +44,7 @@
 		map.classList.remove('map--faded');
 		adForm.classList.remove('ad-form--disabled');
 
-		window.backend.load(window.map.onCreateCardsAndPins, window.error);
+		window.backend.load(window.map.getData, window.error);		
 	};
 
 	var shutdownMapAndForm = function () {

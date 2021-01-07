@@ -1,12 +1,18 @@
 'use strict';
 
 (function () {	
-	// Валидация комнат и гостей
+	var quantityRoomsToPrice = {
+		'bungalo': '0',
+		'flat': '1000',
+		'house': '5000',
+		'palace': '10000'
+	};
+
 	var roomNumber = document.querySelector('#room_number');
 	var capacityNumber = document.querySelector('#capacity');
-
 	var formSubmit = document.querySelector('.ad-form__submit');
 
+	// Валидация комнат и гостей
 	var getRoomsValidity = function (evt) {
 		if (roomNumber.value == 1 && capacityNumber.value > 1) {
 			capacityNumber.setCustomValidity('Выберете не больше 1-ого гостя');
@@ -32,30 +38,16 @@
 	});
 
 	// Валидация типа жилья с ценой
-	var typeHous = document.querySelector('#type');
+	var typeHous = document.querySelector('#type'); 
 	var priceHous = document.querySelector('#price');
 
 	var getTypeValidity = function () {
-		switch (typeHous.value) {
-			case 'bungalo':
-				priceHous.min = 0;
-				priceHous.placeholder = '0';
-				break;
-			case 'flat':
-				priceHous.min = 1000;
-				priceHous.placeholder = '1000';
-				break;
-			case 'house':
-				priceHous.min = 5000;
-				priceHous.placeholder = '5000';
-				break;
-			case 'palace':
-				priceHous.min = 10000;
-				priceHous.placeholder = '10000';
-				break;
-			default: 
-				throw new Error('Ошибка!');
-		}
+		priceHous.min = quantityRoomsToPrice[typeHous.value];
+		priceHous.placeholder = quantityRoomsToPrice[typeHous.value];	
+
+		// 	default: 
+		// 		throw new Error('Ошибка!');
+		// }
 	};
 
 	getTypeValidity();
@@ -64,7 +56,7 @@
 		getTypeValidity();
 	});
 
-	// Валидация времени заезда и выезда              // РАЗОБРАТЬСЯ ---------------------------------
+	// Валидация времени заезда и выезда              // РАЗОБРАТЬСЯ -------------
 	var timeIn = document.querySelector('#timein');
 	var timeOut = document.querySelector('#timeout');
 

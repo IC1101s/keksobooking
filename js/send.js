@@ -3,7 +3,6 @@
 (function () {
 	var ECS_KEY = 'Escape';
 
-	
 	var form = document.querySelector('.ad-form');
 	var formReset = document.querySelector('.ad-form__reset');
 	var pinMain = document.querySelector('.map__pin--main');

@@ -3,6 +3,22 @@
 (function () {
 	var COORDINATES_QUANTITY = 2;
 
+	var valueToTypeHousing = {
+		'flat': 'Квартира',
+		'bungalo': 'Бунгало',
+		'house': 'Дом',
+		'palace': 'Дворец'
+	};
+
+	var serviceToClassName = {
+		'wifi': 'popup__feature--wifi',
+		'dishwasher': 'popup__feature--dishwasher',
+		'parking': 'popup__feature--parking',
+		'washer': 'popup__feature--washer',
+		'elevator': 'popup__feature--elevator',
+		'conditioner': 'popup__feature--conditioner'
+	};
+
 	var mapCard = document.querySelector('#card')
 	.content.querySelector('.map__card');
 
@@ -26,22 +42,7 @@
 		var typeCard = cardElement.querySelector('.popup__type');
 		var typeArray = card.offer.type;
 
-		switch (typeArray) {
-			case 'flat':
-				typeCard.textContent = 'Квартира';
-				break;
-			case 'bungalo':
-				typeCard.textContent = 'Бунгало';
-				break;
-			case 'house':
-				typeCard.textContent = 'Дом';
-				break;
-			case 'palace':
-				typeCard.textContent = 'Дворец';
-				break;
-			default: 
-				typeCard.textContent = 'Не указано'
-		}
+		typeCard.textContent = valueToTypeHousing[typeArray];
 
 		// Выводит количество комнат и гостей
 		cardElement.querySelector('.popup__text--capacity').textContent = card.offer.rooms
@@ -55,28 +56,7 @@
 		for (var j = 0; j < card.offer.features.length; j++) {
 			var cardFeature = card.offer.features[j];
 
-			switch (cardFeature) {
-				case 'wifi':
-					cardElement.querySelector('.popup__feature--wifi').textContent = cardFeature;
-					break;
-				case 'dishwasher':
-					cardElement.querySelector('.popup__feature--dishwasher').textContent = cardFeature;
-					break;
-				case 'parking':
-					cardElement.querySelector('.popup__feature--parking').textContent = cardFeature;
-					break;
-				case 'washer':
-					cardElement.querySelector('.popup__feature--washer').textContent = cardFeature;
-					break;
-				case 'elevator':
-					cardElement.querySelector('.popup__feature--elevator').textContent = cardFeature;
-					break;
-				case 'conditioner':
-					cardElement.querySelector('.popup__feature--conditioner').textContent = cardFeature;
-					break;
-				default: 
-					throw new Error('Неизвестная услуга ' + cardFeature);
-			}		
+			cardElement.querySelector('.' + serviceToClassName[cardFeature]).textContent = cardFeature;
 		}
 
 		// Выводит описание недвижимости
