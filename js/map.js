@@ -2,45 +2,37 @@
 
 (function () {
 	var pinsContainer = document.querySelector('.map__pins');
-	var housingType = document.querySelector('#housing-type');
 
-	var arrayCards = [];
 	var arrayPins = [];
- 	
-	/*var getData = function (data) {
-		var dataPins = [];
+	var arrayCards = [];
 
-		for (var i = 0; i < data.length; i++) {
-			dataPins.push(data[i]);
-		}
-
-		window.filter.test(dataPins);
-		window.filter.getFiltration();
-	};*/
-
-	// Функция для заполнения данных в arrayCards и arrayPins
-	var onCreateCardsAndPins = function (dataPins) {
+	// Функция для заполнения отфильтрованых данных в arrayCards и arrayPins
+	var createCardsAndPins = function () {
 		var createCards = window.card;
 		var createPins = window.pin;
+		var dataFilter = window.filter.getFilter();
 
-		console.log(arrayPins);
+		var maxPins = window.filter.getFilterMaxPins;
+		var maxCards = window.filter.getFilterMaxCards;
+
+		arrayPins = [];
+		arrayCards = [];
 		
-		for (var j = 0; j < dataPins.length; j++) {
-			arrayPins.push(createPins(dataPins[j]));	
-			arrayCards.push(createCards(dataPins[j]));
+		for (var j = 0; j < dataFilter.length; j++) {
+			arrayPins.push(createPins(dataFilter[j]));	
+			arrayCards.push(createCards(dataFilter[j]));
 		}
 
-		// onRenderingPins();
-
-		// window.opencards();
+		renderingPins(maxPins(arrayPins));
+		window.opencards(maxPins(arrayPins), maxCards(arrayCards)); // СКОРЕЕ ВСЕГО ПЕРЕДАЛТЬ ФИЛЬТРАЦИЮ КОЛИЧЕСТВА
 	};
 
 	// Функция для отрисовки pins
-	var onRenderingPins = function () {
+	var renderingPins = function (pin) {
 		var fragment = document.createDocumentFragment();
 
-		for (var i = 0; i < arrayPins.length; i++) {
-			fragment.appendChild(arrayPins[i]);
+		for (var i = 0; i < pin.length; i++) {
+			fragment.appendChild(pin[i]);
 		}
 
 		pinsContainer.appendChild(fragment);		
@@ -49,8 +41,6 @@
 	window.map = {
 		arrayCards: arrayCards,
 		arrayPins: arrayPins,
-		// getData: getData,
-		onCreateCardsAndPins: onCreateCardsAndPins,
-		onRenderingPins: onRenderingPins
+		createCardsAndPins: createCardsAndPins
 	};
 })();

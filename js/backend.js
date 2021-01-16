@@ -1,8 +1,8 @@
 'use strict';
 
 (function () {
-	var URL_GET = 'https://javascript.pages.academy/keksobooking/data';
-	var URL_POST = 'https://javascript.pages.academy/keksobooking';
+	var URL_GET = 'https://21.javascript.pages.academy/keksobooking/data'; // https://javascript.pages.academy/keksobooking/data
+	var URL_POST = 'https://21.javascript.pages.academy/keksobooking';
 	var TIMEOUT_IN_MS = 10000;
 	var STATUS_OK = 200;
 

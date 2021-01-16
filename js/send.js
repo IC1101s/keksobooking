@@ -4,17 +4,20 @@
 	var ECS_KEY = 'Escape';
 
 	var form = document.querySelector('.ad-form');
+	var mapFilters = document.querySelector('.map__filters');
 	var formReset = document.querySelector('.ad-form__reset');
 	var pinMain = document.querySelector('.map__pin--main');
 	var main = document.querySelector('main');
 	var success = document.querySelector('#success')
 	.content.querySelector('.success');
 
-	// Сброс данных
+	// Сброс данных                    ПОПРОБОВАТЬ RESET
 	var getClean = function () {
-		window.condition.shutdownMapAndForm();
+		window.condition.disabledFunctionsForSend();
 
 		form.reset(); // чистит адрес (исправить)
+
+		mapFilters.reset(); // ставит фильтры по умолчанию
 
 		pinMain.style.left = 570 + 'px';
 		pinMain.style.top = 375 + 'px';
@@ -22,7 +25,6 @@
 		window.address(); 
 		// не работает дополнительное прибавление координат
 
-		// не добавлено обнуление фильтров
 		var card = document.querySelector('.map__card');
 		if (card) {
 			card.remove();
@@ -69,4 +71,8 @@
 	formReset.addEventListener('click', function () {
 		getClean();
 	});
+
+	window.send = {
+		getClean: getClean
+	};
 })();

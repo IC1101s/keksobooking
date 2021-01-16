@@ -24,7 +24,7 @@
 		document.removeEventListener('keydown', onKeydownPopupError);	
 	};
 
-	var onError = function (err) {
+	var creaturePopupError = function (err) {
 		var p = document.createElement('p');
 
 		p.style.fontSize = '30px';
@@ -39,5 +39,5 @@
 		document.addEventListener('keydown', onKeydownPopupError);					
 	};
 
-	window.error = onError;
+	window.error = creaturePopupError;
 })();

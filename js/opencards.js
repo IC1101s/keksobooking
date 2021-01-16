@@ -6,22 +6,19 @@
 	var map = document.querySelector('.map');
 	var filtersContainer = document.querySelector('.map__filters-container');
 	
-	var openCard = function () {
-		var pins = window.map.arrayPins;
-		var cards = window.map.arrayCards;
-
+	var openCard = function (pins, cards) {
 		for (var i = 0; i < pins.length; i++) {
 			(function (mapPin, mapCard) {
 				mapPin.addEventListener('click', function () {
 					map.insertBefore(mapCard, filtersContainer);
 
 					// Удаление ненужных feature
-					var feature = document.querySelectorAll('.popup__feature');
-					for (var j = 0; j < feature.length; j++) {
-						if (feature[j].textContent === '') {	
-							feature[j].remove();
-						}
-					}
+					// var feature = document.querySelectorAll('.popup__feature');
+					// for (var j = 0; j < feature.length; j++) {
+					// 	if (feature[j].textContent === '') {	
+					// 		feature[j].remove();
+					// 	}
+					// }
 
 					// Удаление карточки, если их больше 1 в массиве
 					var allCard = map.querySelectorAll('.map__card');

@@ -2,7 +2,7 @@
 
 (function () {	
 	var quantityRoomsToPrice = {
-		'bungalo': '0',
+		'bungalow': '0',
 		'flat': '1000',
 		'house': '5000',
 		'palace': '10000'
@@ -10,7 +10,6 @@
 
 	var roomNumber = document.querySelector('#room_number');
 	var capacityNumber = document.querySelector('#capacity');
-	var formSubmit = document.querySelector('.ad-form__submit');
 
 	// Валидация комнат и гостей
 	var getRoomsValidity = function (evt) {
@@ -44,10 +43,6 @@
 	var getTypeValidity = function () {
 		priceHous.min = quantityRoomsToPrice[typeHous.value];
 		priceHous.placeholder = quantityRoomsToPrice[typeHous.value];	
-
-		// 	default: 
-		// 		throw new Error('Ошибка!');
-		// }
 	};
 
 	getTypeValidity();
