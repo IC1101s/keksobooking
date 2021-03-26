@@ -11,13 +11,13 @@
 	var onKeydownPopupError = function (evt) {
 		if (evt.key === ECS_KEY) { 
 			error.remove();
-		}
 
-		document.removeEventListener('keydown', onKeydownPopupError);	
-		document.removeEventListener('click', onClickPopupError);	
+			document.removeEventListener('keydown', onKeydownPopupError);	
+			document.removeEventListener('click', onClickPopupError);	
+		}
 	};
 
-	var onClickPopupError = function () {
+	var onClickPopupError = function (evt) {
 		error.remove();
 
 		document.removeEventListener('click', onClickPopupError);	
@@ -26,6 +26,11 @@
 
 	var creaturePopupError = function (err) {
 		var p = document.createElement('p');
+		var text = error.querySelectorAll('p');
+
+		if (text.length > 1) { // удаляет накопление текста
+			text[1].remove();
+		}
 
 		p.style.fontSize = '30px';
 		p.style.color = 'white';
@@ -35,7 +40,7 @@
 		main.appendChild(error);
 
 		errorButton.addEventListener('click', onClickPopupError);
-		document.addEventListener('click', onClickPopupError);
+		error.addEventListener('click', onClickPopupError);
 		document.addEventListener('keydown', onKeydownPopupError);					
 	};
 

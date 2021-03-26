@@ -17,10 +17,10 @@
 
 		arrayPins = [];
 		arrayCards = [];
-		
-		for (var j = 0; j < dataFilter.length; j++) {
-			arrayPins.push(createPins(dataFilter[j]));	
-			arrayCards.push(createCards(dataFilter[j]));
+
+		for (var i = 0; i < dataFilter.length; i++) {
+			arrayPins.push(createPins(dataFilter[i]));	
+			arrayCards.push(createCards(dataFilter[i]));
 		}
 
 		renderingPins(maxPins(arrayPins));

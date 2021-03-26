@@ -21,11 +21,11 @@
 			});
 
 			xhr.addEventListener('error', function () {
-				onError('Произошла ошибка соединения');
+				onError('Произошла ошибка соединения, проверьте подключение к интернету');
 			});
 
 			xhr.addEventListener('timeout', function () {
-				onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+				onError('Запрос не успел выполниться за ' + xhr.timeout + ' мс');
 			});
 
 			xhr.timeout = TIMEOUT_IN_MS;
@@ -49,11 +49,11 @@
 			});
 
 			xhr.addEventListener('error', function () {
-				onError('Произошла ошибка соединения');
+				onError('Произошла ошибка соединения, проверьте подключение к интернету');
 			});
 
 			xhr.addEventListener('timeout', function () {
-				onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+				onError('Запрос не успел выполниться за ' + xhr.timeout + ' мс');
 			});
 
 			xhr.timeout = TIMEOUT_IN_MS;

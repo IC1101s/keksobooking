@@ -51,7 +51,7 @@
 		getTypeValidity();
 	});
 
-	// Валидация времени заезда и выезда              // РАЗОБРАТЬСЯ -------------
+	// Валидация времени заезда и выезда          
 	var timeIn = document.querySelector('#timein');
 	var timeOut = document.querySelector('#timeout');
 

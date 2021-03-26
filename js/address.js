@@ -69,5 +69,25 @@
 		document.addEventListener('mouseup', onMouseUp);
 	};
 
-	window.address = getMovingPin;
+	pinMain.addEventListener('mousedown', getMovingPin);
+
+	// Сброс адреса до дефолта
+	var resetAddress = function () {
+		dragger = true;
+
+		var newAddressMain = {
+			x: (Number(valueCoordX) + PIN_WIDTH / 2),
+			y: (Number(valueCoordY) + PIN_HEIGHT / 2)
+		};
+
+		pinMain.style.left = valueCoordX + 'px';
+		pinMain.style.top = valueCoordY + 'px';
+
+		addressForm.value = newAddressMain.x + ', ' + newAddressMain.y;
+	};
+
+	window.address = {
+		getMovingPin: getMovingPin,
+		resetAddress: resetAddress
+	}
 })();

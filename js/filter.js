@@ -113,7 +113,7 @@
 		return pinsFilterFeatures;
 	};
 
-	var getFilterMaxPins = function (arrayPins) { // СКОРЕЕ ВСЕГО ПЕРЕДАЛТЬ ФИЛЬТРАЦИЮ КОЛИЧЕСТВА
+	var getFilterMaxPins = function (arrayPins) { // СКОРЕЕ ВСЕГО ПЕРЕДЕЛАТЬ ФИЛЬТРАЦИЮ КОЛИЧЕСТВА
 		var maxPins = arrayPins.filter(function (pin, index) {
 			if (index < 5) {
 				return pin;
@@ -123,7 +123,7 @@
 		return maxPins;
 	};
 
-	var getFilterMaxCards = function (arrayCards) { // СКОРЕЕ ВСЕГО ПЕРЕДАЛТЬ ФИЛЬТРАЦИЮ КОЛИЧЕСТВА
+	var getFilterMaxCards = function (arrayCards) { // СКОРЕЕ ВСЕГО ПЕРЕДЕЛАТЬ ФИЛЬТРАЦИЮ КОЛИЧЕСТВА
 		var maxCards = arrayCards.filter(function (card, index) {
 			if (index < 5) {
 				return card;

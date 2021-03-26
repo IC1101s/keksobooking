@@ -11,19 +11,15 @@
 	var success = document.querySelector('#success')
 	.content.querySelector('.success');
 
-	// Сброс данных                    ПОПРОБОВАТЬ RESET
+	// Сброс данных          
 	var getClean = function () {
 		window.condition.disabledFunctionsForSend();
 
-		form.reset(); // чистит адрес (исправить)
+		form.reset();
 
 		mapFilters.reset(); // ставит фильтры по умолчанию
 
-		pinMain.style.left = 570 + 'px';
-		pinMain.style.top = 375 + 'px';
-
-		window.address(); 
-		// не работает дополнительное прибавление координат
+		window.address.resetAddress();
 
 		var card = document.querySelector('.map__card');
 		if (card) {
@@ -39,10 +35,10 @@
 	var onKeydownPopupSend = function (evt) {
 		if (evt.key === ECS_KEY) { 
 			success.remove();
-		}
 
-		document.removeEventListener('keydown', onKeydownPopupSend);	
-		document.removeEventListener('click', onClickPopupSend);	
+			document.removeEventListener('keydown', onKeydownPopupSend);	
+			document.removeEventListener('click', onClickPopupSend);	
+		}
 	};
 
 	var onClickPopupSend = function () {
@@ -54,6 +50,8 @@
 
 	// AJAX отправка данных и сброс
 	form.addEventListener('submit', function (evt) {
+		evt.preventDefault();
+
 		window.backend.publish(new FormData(form), function (response) {
 			main.appendChild(success);
 
@@ -63,13 +61,11 @@
 		}, window.error);
 
 		getClean();
-
-		evt.preventDefault();
 	});
 
 	// Сброс по кнопке reset
 	formReset.addEventListener('click', function () {
-		getClean();
+		getClean();	
 	});
 
 	window.send = {

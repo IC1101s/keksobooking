@@ -12,14 +12,6 @@
 				mapPin.addEventListener('click', function () {
 					map.insertBefore(mapCard, filtersContainer);
 
-					// Удаление ненужных feature
-					// var feature = document.querySelectorAll('.popup__feature');
-					// for (var j = 0; j < feature.length; j++) {
-					// 	if (feature[j].textContent === '') {	
-					// 		feature[j].remove();
-					// 	}
-					// }
-
 					// Удаление карточки, если их больше 1 в массиве
 					var allCard = map.querySelectorAll('.map__card');
 					if (allCard.length > 1) {
@@ -46,7 +38,7 @@
 
 					cardСlose.addEventListener('click', onClickCloseCard);
 					document.addEventListener('keydown', onDownEscCloseCard);
-			});
+				});
 			})(pins[i], cards[i]);
 		} 	
 	};
