@@ -6,7 +6,7 @@
 	var PIN_MAX_LEFT = 0;
 	var PIN_MAX_RIGHT = 1200;
 	var PIN_WIDTH = 62;
-  	var PIN_TIP = 22;
+	var PIN_HEIGHT = 62;
   	var CLICK_LEFT = 1;
 
 	var pinMain = document.querySelector('.map__pin--main');
@@ -43,10 +43,10 @@
 				}
 
 				// Перемещение метки с ограничениями по вертикали
-				if (pinMain.offsetTop - shift.y <= PIN_MAX_TOP) {
-					pinMain.style.top = PIN_MAX_TOP + 'px';
-				} else if (pinMain.offsetTop - shift.y >= PIN_MAX_BOTTOM - PIN_TIP) {
-					pinMain.style.top = PIN_MAX_BOTTOM - PIN_TIP + 'px';
+				if (pinMain.offsetTop - shift.y <= PIN_MAX_TOP - PIN_HEIGHT / 2) {
+					pinMain.style.top = PIN_MAX_TOP - PIN_HEIGHT / 2 + 'px';
+				} else if (pinMain.offsetTop - shift.y >= PIN_MAX_BOTTOM - PIN_HEIGHT / 2) {
+					pinMain.style.top = PIN_MAX_BOTTOM - PIN_HEIGHT / 2 + 'px';
 				} else {
 					pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
 				}

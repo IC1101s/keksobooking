@@ -20,13 +20,11 @@
 		} else if (roomNumber.value < 100 && capacityNumber.value == 0) {
 			capacityNumber.setCustomValidity('Не для гостей - выбирается только на 100 комнат');
 		} else if (roomNumber.value == 100 && capacityNumber.value > 0) {
-			capacityNumber.setCustomValidity('Выберете - не для гостей');
+			capacityNumber.setCustomValidity('Выберите - не для гостей');
 		} else {
 			capacityNumber.setCustomValidity('');
 		}	
 	};
-
-	getRoomsValidity();
 
 	roomNumber.addEventListener('change', function () {
 		getRoomsValidity();
@@ -43,9 +41,7 @@
 	var getTypeValidity = function () {
 		priceHous.min = quantityRoomsToPrice[typeHous.value];
 		priceHous.placeholder = quantityRoomsToPrice[typeHous.value];	
-	};
-
-	getTypeValidity();
+	};	
 
 	typeHous.addEventListener('change', function () {
 		getTypeValidity();
@@ -66,4 +62,14 @@
 	timeOut.addEventListener('change', function () {
 		getTimeValidity(timeOut, timeIn);
 	});
+
+	// Первичная валидация и валидация после опубликовки
+	var getStartValidity = function () {
+		getTypeValidity();
+		getRoomsValidity();
+	};
+
+	getStartValidity();
+
+	window.validity = getStartValidity;
 })();

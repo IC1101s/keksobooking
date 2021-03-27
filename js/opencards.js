@@ -10,7 +10,23 @@
 		for (var i = 0; i < pins.length; i++) {
 			(function (mapPin, mapCard) {
 				mapPin.addEventListener('click', function () {
+					// Добавление карточки
 					map.insertBefore(mapCard, filtersContainer);
+					
+					// Чистка активных пинов
+					var mapPins = document.querySelectorAll('.map__pin');
+					var cleanPinActive = function () {
+						for (var j = 0; j < mapPins.length; j++) {	
+							if (mapPins[j].classList.contains('map__pin--active')) {
+								mapPins[j].classList.remove('map__pin--active');
+							}			
+						}
+					};
+
+					cleanPinActive();
+					
+					// Добавление актовного пина
+					mapPin.classList.add('map__pin--active');
 
 					// Удаление карточки, если их больше 1 в массиве
 					var allCard = map.querySelectorAll('.map__card');
@@ -25,6 +41,8 @@
 					var onClickCloseCard = function () {
 						if (card) {
 							card.remove();
+							cleanPinActive();
+
 							document.removeEventListener('keydown', onDownEscCloseCard);
 						} // какая-та проблема с null			
 					};
@@ -32,6 +50,8 @@
 					var onDownEscCloseCard = function (evt) {	
 						if (card && evt.key === ECS_KEY) {
 							card.remove();
+							cleanPinActive();
+
 							document.removeEventListener('keydown', onDownEscCloseCard);
 						}		
 					};

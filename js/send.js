@@ -13,6 +13,9 @@
 
 	// Сброс данных          
 	var getClean = function () {
+		var card = document.querySelector('.map__card');
+		var allPins = document.querySelectorAll('.map__pin');
+
 		window.condition.disabledFunctionsForSend();
 
 		form.reset();
@@ -20,13 +23,11 @@
 		mapFilters.reset(); // ставит фильтры по умолчанию
 
 		window.address.resetAddress();
-
-		var card = document.querySelector('.map__card');
+	
 		if (card) {
 			card.remove();
 		}
 		
-		var allPins = document.querySelectorAll('.map__pin');
 		for (var i = 1; i < allPins.length; i++) {
 			allPins[i].remove();
 		}
@@ -61,6 +62,7 @@
 		}, window.error);
 
 		getClean();
+		window.validity();
 	});
 
 	// Сброс по кнопке reset

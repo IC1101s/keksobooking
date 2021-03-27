@@ -8,23 +8,31 @@
 
 	// Функция для заполнения отфильтрованых данных в arrayCards и arrayPins
 	var createCardsAndPins = function () {
+		var allPins = document.querySelectorAll('.map__pin');
+		var card = document.querySelector('.map__card');
+
 		var createCards = window.card;
 		var createPins = window.pin;
-		var dataFilter = window.filter.getFilter();
-
-		var maxPins = window.filter.getFilterMaxPins;
-		var maxCards = window.filter.getFilterMaxCards;
-
+		var dataFilter = window.filter.getFilter();	
+		
 		arrayPins = [];
 		arrayCards = [];
 
+		for (var i = 1; i < allPins.length; i++) {
+			allPins[i].remove();
+		}
+
+		if (card) {
+			card.remove();
+		}
+		
 		for (var i = 0; i < dataFilter.length; i++) {
 			arrayPins.push(createPins(dataFilter[i]));	
 			arrayCards.push(createCards(dataFilter[i]));
 		}
 
-		renderingPins(maxPins(arrayPins));
-		window.opencards(maxPins(arrayPins), maxCards(arrayCards)); // СКОРЕЕ ВСЕГО ПЕРЕДАЛТЬ ФИЛЬТРАЦИЮ КОЛИЧЕСТВА
+		renderingPins(arrayPins);
+		window.opencards(arrayPins, arrayCards);
 	};
 
 	// Функция для отрисовки pins
@@ -35,7 +43,9 @@
 			fragment.appendChild(pin[i]);
 		}
 
-		pinsContainer.appendChild(fragment);		
+		pinsContainer.appendChild(fragment);
+
+		window.condition.activationFilters();		
 	};
 
 	window.map = {

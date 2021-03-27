@@ -60,8 +60,8 @@
 	};
 
 	// Фильтрация данных
-	var getFilter = function () {
-		var pinsFilterType = data.filter(function (pin) {
+ 	var getFilter = function () {
+		var pinsFilter = data.filter(function (pin) {
 			var pinType = pin.offer.type;
 
 			if (housingType.value === 'any') { // ПОДУМАТЬ КАК ДОБАВИТЬ В СЛОВАРЬ
@@ -69,35 +69,31 @@
 			} 
 
 			return housingType.value === valueToType[pinType];
-		});	
-
-		var pinsFilterPrice = pinsFilterType.filter(function (pin) {
+		}).
+		filter(function (pin) {
 			var pinPrice = pin.offer.price;
 
 			return pinPrice >= valueToPrice[housingPrice.value].from && pinPrice <= valueToPrice[housingPrice.value].to;
-		});
-
-		var pinsFilterRooms = pinsFilterPrice.filter(function (pin) {
+		}).
+		filter(function (pin) {
 			var pinRooms = pin.offer.rooms;
 
-			if (housingRooms.value === 'any') { // ПОДУМАТЬ КАК ДОБАВИТЬ В СЛОВАРЬ
+			if (housingRooms.value === 'any') { 
 				return pin;
 			} 
 
 			return housingRooms.value === valueToRooms[pinRooms];
-		});
-
-		var pinsFilterGuests = pinsFilterRooms.filter(function (pin) {
+		}).
+		filter(function (pin) {
 			var pinGuests = pin.offer.guests;
 
-			if (housingGuests.value === 'any') { // ПОДУМАТЬ КАК ДОБАВИТЬ В СЛОВАРЬ
+			if (housingGuests.value === 'any') {
 				return pin;
 			} 
 
 			return housingGuests.value === valueToGuests[pinGuests];
-		});
-
-		var pinsFilterFeatures = pinsFilterGuests.filter(function (pin) {
+		}).
+		filter(function (pin) {
 			var pinFeatures = pin.offer.features;
 			var features = document.querySelectorAll('input[name=features]:checked');
 
@@ -108,45 +104,19 @@
 			}
 
 			return true;
-		});
-
-		return pinsFilterFeatures;
-	};
-
-	var getFilterMaxPins = function (arrayPins) { // СКОРЕЕ ВСЕГО ПЕРЕДЕЛАТЬ ФИЛЬТРАЦИЮ КОЛИЧЕСТВА
-		var maxPins = arrayPins.filter(function (pin, index) {
+		}).
+		filter(function (pin, index) {	// КАК-НИБУДЬ РАНДОМИЗИРОВАТЬ 
 			if (index < 5) {
 				return pin;
 			}
 		});
 
-		return maxPins;
+		return pinsFilter;
 	};
 
-	var getFilterMaxCards = function (arrayCards) { // СКОРЕЕ ВСЕГО ПЕРЕДЕЛАТЬ ФИЛЬТРАЦИЮ КОЛИЧЕСТВА
-		var maxCards = arrayCards.filter(function (card, index) {
-			if (index < 5) {
-				return card;
-			}
-		});
-
-		return maxCards;
-	};
-
-	// Перерисовка pins с новыми фильтрами
+	// Перерисовка pins с новыми фильтрами (с устранением дребизга)
 	var rebootFilter = function () {
-		var allPins = document.querySelectorAll('.map__pin');
-		var card = document.querySelector('.map__card');
-
-		for (var i = 1; i < allPins.length; i++) {
-			allPins[i].remove();
-		}
-
-		if (card) {
-			card.remove();
-		}
-
-		window.map.createCardsAndPins();
+		window.debounce(window.map.createCardsAndPins);
 	};
 
 	housingType.addEventListener('change', rebootFilter);
@@ -162,8 +132,70 @@
 
 	window.filter = {
 		getData: getData,
-		getFilter: getFilter,
-		getFilterMaxPins: getFilterMaxPins,
-		getFilterMaxCards: getFilterMaxCards
+		getFilter: getFilter
 	};
 })();
+
+// var getFilterMaxCards = function (arrayCards) { // СКОРЕЕ ВСЕГО ПЕРЕДЕЛАТЬ ФИЛЬТРАЦИЮ КОЛИЧЕСТВА
+// 	var maxCards = arrayCards.filter(function (card, index) {
+// 		if (index < 5) {
+// 			return card;
+// 		}
+// 	});
+
+// 	return maxCards;
+// };
+
+
+/*var getFilter = function () {
+	var pinsFilterType = data.filter(function (pin) {
+		var pinType = pin.offer.type;
+
+		if (housingType.value === 'any') { // ПОДУМАТЬ КАК ДОБАВИТЬ В СЛОВАРЬ
+			return pin;
+		} 
+
+		return housingType.value === valueToType[pinType];
+	});	
+
+	var pinsFilterPrice = pinsFilterType.filter(function (pin) {
+		var pinPrice = pin.offer.price;
+
+		return pinPrice >= valueToPrice[housingPrice.value].from && pinPrice <= valueToPrice[housingPrice.value].to;
+	});
+
+	var pinsFilterRooms = pinsFilterPrice.filter(function (pin) {
+		var pinRooms = pin.offer.rooms;
+
+		if (housingRooms.value === 'any') { // ПОДУМАТЬ КАК ДОБАВИТЬ В СЛОВАРЬ
+			return pin;
+		} 
+
+		return housingRooms.value === valueToRooms[pinRooms];
+	});
+
+	var pinsFilterGuests = pinsFilterRooms.filter(function (pin) {
+		var pinGuests = pin.offer.guests;
+
+		if (housingGuests.value === 'any') { // ПОДУМАТЬ КАК ДОБАВИТЬ В СЛОВАРЬ
+			return pin;
+		} 
+
+		return housingGuests.value === valueToGuests[pinGuests];
+	});
+
+	var pinsFilterFeatures = pinsFilterGuests.filter(function (pin) {
+		var pinFeatures = pin.offer.features;
+		var features = document.querySelectorAll('input[name=features]:checked');
+
+		for (var i = 0; i < features.length; i++) {
+			if (!pinFeatures.includes(features[i].value)) {
+				return false;
+			}
+		}
+
+		return true;
+	});
+
+	return pinsFilterFeatures;
+};*/
