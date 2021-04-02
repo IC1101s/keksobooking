@@ -5,6 +5,8 @@
 
 	var error = document.querySelector('#error')
 	.content.querySelector('.error');
+	var waiting = document.querySelector('#waiting')
+	.content.querySelector('.waiting')
 	var errorButton = error.querySelector('.error__button');
 	var main = document.querySelector('main');
 
@@ -27,6 +29,8 @@
 	var creaturePopupError = function (err) {
 		var p = document.createElement('p');
 		var text = error.querySelectorAll('p');
+
+		waiting.remove(); // удаляет ожидание отправки
 
 		if (text.length > 1) { // удаляет накопление текста
 			text[1].remove();
