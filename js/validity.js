@@ -14,13 +14,13 @@
 	// Валидация комнат и гостей
 	var getRoomsValidity = function (evt) {
 		if (roomNumber.value == 1 && capacityNumber.value > 1) {
-			capacityNumber.setCustomValidity('Выберете не больше 1-ого гостя');
+			capacityNumber.setCustomValidity('Choose no more than 1 guest');
 		} else if (roomNumber.value == 2 && capacityNumber.value > 2) {
-			capacityNumber.setCustomValidity('Выберете не больше 2-ух гостей');
+			capacityNumber.setCustomValidity('Choose no more than 2 guests');
 		} else if (roomNumber.value < 100 && capacityNumber.value == 0) {
-			capacityNumber.setCustomValidity('Не для гостей - выбирается только на 100 комнат');
+			capacityNumber.setCustomValidity('Not for guests - only selectable for 100 rooms');
 		} else if (roomNumber.value == 100 && capacityNumber.value > 0) {
-			capacityNumber.setCustomValidity('Выберите - не для гостей');
+			capacityNumber.setCustomValidity('Choose - not for guests');
 		} else {
 			capacityNumber.setCustomValidity('');
 		}	

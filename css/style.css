@@ -307,9 +307,9 @@ fieldset {
 }
 
 .map--faded .map__pin--main svg {
-  -webkit-transform: rotate(-20deg) scale(1);
-      -ms-transform: rotate(-20deg) scale(1);
-          transform: rotate(-20deg) scale(1);
+  -webkit-transform: rotate(10deg) scale(1);
+      -ms-transform: rotate(10deg) scale(1);
+          transform: rotate(10deg) scale(1);
 }
 
 .map--faded .map__pin--main::after {

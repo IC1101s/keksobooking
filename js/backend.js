@@ -16,16 +16,16 @@
 				if (xhr.status === STATUS_OK) {
 					onLoad(xhr.response);
 				} else {
-					onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+					onError('Response status: ' + xhr.status + ' ' + xhr.statusText);
 				}	
 			});
 
 			xhr.addEventListener('error', function () {
-				onError('Произошла ошибка соединения, проверьте подключение к интернету');
+				onError('A connection error has occurred, check your internet connection');
 			});
 
 			xhr.addEventListener('timeout', function () {
-				onError('Запрос не успел выполниться за ' + xhr.timeout + ' мс');
+				onError('The request did not have time to execute in ' + xhr.timeout + ' ms');
 			});
 
 			xhr.timeout = TIMEOUT_IN_MS;
@@ -44,16 +44,16 @@
 				if (xhr.status === STATUS_OK) {
 					onPublish(xhr.response);
 				} else {
-					onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+					onError('Response status: ' + xhr.status + ' ' + xhr.statusText);
 				}	
 			});
 
 			xhr.addEventListener('error', function () {
-				onError('Произошла ошибка соединения, проверьте подключение к интернету');
+				onError('A connection error has occurred, check your internet connection');
 			});
 
 			xhr.addEventListener('timeout', function () {
-				onError('Запрос не успел выполниться за ' + xhr.timeout + ' мс');
+				onError('The request did not have time to execute in ' + xhr.timeout + ' ms');
 			});
 
 			xhr.timeout = TIMEOUT_IN_MS;
