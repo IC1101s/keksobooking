@@ -881,7 +881,8 @@ fieldset {
 
 .footer {
   margin-top: 30px;
-  padding-top: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   border-top: solid 1px #cccccc;
 
   display: -webkit-box;
