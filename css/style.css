@@ -948,22 +948,12 @@ fieldset {
   cursor: pointer;
 }
 
-.contacts__link:focus {
-  outline: none;
-  -webkit-box-shadow: 0 0 2px 2px #ff6547;
-          box-shadow: 0 0 2px 2px #ff6547;
-}
-
 .contacts__link--twitter {
   background-position: 0 0;
 }
 
 .contacts__link--instagram {
   background-position: 0 -35px;
-}
-
-.contacts__link--facebook {
-  background-position: 0 -70px;
 }
 
 .contacts__link--vk {
@@ -995,6 +985,18 @@ fieldset {
           box-shadow: 0 0 2px 2px #ff6547;
 }
 
+.contacts__link-gmail,
+.contacts__link-github {
+  font-size: 0;
+  margin-left: 10px;
+}
+
+.contacts__link-gmail:hover #gmail-fill,
+.contacts__link-gmail:focus #gmail-fill,
+.contacts__link-github:hover #github-fill,
+.contacts__link-github:focus #github-fill {
+  fill: #ff5635;
+}
 
 /* Вспомогательные экраны
    ========================================================================== */
